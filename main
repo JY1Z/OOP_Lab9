@@ -1,0 +1,92 @@
+#1
+class Car:
+   def __init__(self,registration_number, maximum_speed):
+      self.registration_number = registration_number
+      self.maximum_speed = maximum_speed
+      self.current_speed = 0
+      self.travelled_distance = 0
+
+newcar = Car("ABC-123","142 km/h")
+print(f"The new car:\n1.Registration number: {newcar.registration_number}"
+      f"\n2.Maximum speed: {newcar.maximum_speed}"
+      f"\n3.Current speed: {newcar.current_speed}"
+      f"\n4.Travelled distance: {newcar.travelled_distance}"
+)
+
+
+#2
+class Car:
+    def __init__(self,registration_number, maximum_speed):
+      self.registration_number = registration_number
+      self.maximum_speed = maximum_speed
+      self.current_speed = 0
+      self.travelled_distance = 0
+
+    def accerelate(self,changeofspeed):
+      self.current_speed = self.current_speed + changeofspeed
+      if self.current_speed > self.maximum_speed:
+           print("Error: out of the MAX speed range")
+      if self.current_speed < 0:
+          print("The car stops.")
+newcar = Car("ABC-123",200)
+newcar.accerelate(30)
+newcar.accerelate(70)
+newcar.accerelate(50)
+print(f"The current speed of the car: {newcar.current_speed} km/h")
+newcar.accerelate(-200)
+print( f"The final speed:{newcar.current_speed} km/h")
+
+
+#3
+class Car:
+    def __init__(self,registration_number, maximum_speed,current_speed,travelled_distance):
+      self.registration_number = registration_number
+      self.maximum_speed = maximum_speed
+      self.current_speed = current_speed
+      self.travelled_distance = travelled_distance
+
+    def drive(self,hours):
+        travelled_distance = self.travelled_distance + self.current_speed * hours
+        return travelled_distance
+
+car3 = Car("ABC-123",200,60,2000)
+print(f"The travelled distance: {car3.drive(1.5)} km")
+
+#4
+import random
+from tabulate import tabulate
+class Car:
+    def __init__(self,registration_number, maximum_speed,current_speed,travelled_distance):
+      self.registration_number = registration_number
+      self.maximum_speed = maximum_speed
+      self.current_speed = current_speed
+      self.travelled_distance = travelled_distance
+    def accerelate(self,changeofspeed):
+      self.current_speed = self.current_speed + changeofspeed
+      if self.current_speed > self.maximum_speed:
+           print("Error: out of the MAX speed range")
+
+    def drive(self, hours):
+        self.travelled_distance = self.travelled_distance + self.current_speed * hours
+        return self.travelled_distance
+
+cars = []
+i = 1
+while i <= 10:
+    cars.append(Car(f"ABC-{i}",random.randint(100,200),0,0))
+    i = i + 1
+#print(cars[1])
+car_table = []
+h = 1
+for car in cars:
+    while car.travelled_distance < 10000:
+     car.accerelate(random.randint(-10, 15))
+     car.drive(h)
+     h = h + 1
+    else:
+     car_table.append([car.registration_number, car.maximum_speed, car.current_speed, car.travelled_distance])
+
+headers = ["Registration Number", "Maximum Speed", "Current Speed", "Travelled Distance"]
+table = tabulate(car_table, headers, tablefmt="pretty")
+
+print(table)
